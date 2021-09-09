@@ -34,4 +34,6 @@ data class ResultsItem(
     val adult: Boolean = false,
     @SerializedName("vote_count")
     val voteCount: Int = 0
-) : Parcelable
+) : Parcelable{
+    val baseUrl: String get() = "https://image.tmbd.org/t/p/w500"
+}

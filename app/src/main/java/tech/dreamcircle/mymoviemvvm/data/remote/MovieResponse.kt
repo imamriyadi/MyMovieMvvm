@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Movie(
+data class MovieResponse(
     @SerializedName("dates")
     val dates: Dates,
     @SerializedName("page")
@@ -16,6 +16,4 @@ data class Movie(
     val results: List<ResultsItem>?,
     @SerializedName("total_results")
     val totalResults: Int = 0
-) : Parcelable {
-    val baseUrl: String get() = "https://image.tmbd.org/t/p/w500"
-}
+) : Parcelable
