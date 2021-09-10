@@ -6,4 +6,5 @@ import tech.dreamcircle.mymoviemvvm.data.remote.MovieRepository
 
 class MovieViewModel @ViewModelInject constructor(private val repository: MovieRepository) :
     ViewModel() {
+    val movies = repository.getNowPlayingMovies()
 }

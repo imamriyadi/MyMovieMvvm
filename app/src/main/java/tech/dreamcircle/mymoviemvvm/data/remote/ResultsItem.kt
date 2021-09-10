@@ -27,7 +27,7 @@ data class ResultsItem(
     @SerializedName("popularity")
     val popularity: Double = 0.0,
     @SerializedName("vote_average")
-    val voteAverage: Int = 0,
+    val voteAverage: Double = 0.0,
     @SerializedName("id")
     val id: Int = 0,
     @SerializedName("adult")
@@ -35,5 +35,5 @@ data class ResultsItem(
     @SerializedName("vote_count")
     val voteCount: Int = 0
 ) : Parcelable{
-    val baseUrl: String get() = "https://image.tmbd.org/t/p/w500"
+    val baseUrl: String get() = "https://image.tmdb.org/t/p/w500"
 }

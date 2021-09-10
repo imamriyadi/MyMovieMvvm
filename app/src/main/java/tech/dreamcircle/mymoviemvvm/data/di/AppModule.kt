@@ -2,13 +2,15 @@ package tech.dreamcircle.mymoviemvvm.data.di
 
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import tech.dreamcircle.mymoviemvvm.data.remote.MovieApi
 import javax.inject.Singleton
 
 @Module
-@Singleton
+@InstallIn(ApplicationComponent::class)
 object AppModule {
     @Provides
     @Singleton
