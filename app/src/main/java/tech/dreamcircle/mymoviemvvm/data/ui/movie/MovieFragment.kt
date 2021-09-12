@@ -5,8 +5,10 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import tech.dreamcircle.mymoviemvvm.R
 import tech.dreamcircle.mymoviemvvm.databinding.FragmentMovieBinding
@@ -27,6 +29,25 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
                 header = MovieLoadStateAdapter { adapter.retry() },
                 footer = MovieLoadStateAdapter { adapter.retry() }
             )
+            btnTryAgain.setOnClickListener {
+                adapter.retry()
+            }
+        }
+        adapter.addLoadStateListener { loadState ->
+            binding.apply {
+                progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                rvMovie.isVisible = loadState.source.refresh is LoadState.NotLoading
+                btnTryAgain.isVisible = loadState.source.refresh is LoadState.Error
+                tvFailed.isVisible = loadState.source.refresh is LoadState.Error
+
+                if (loadState.source.refresh is LoadState.NotLoading &&
+                    loadState.append.endOfPaginationReached &&
+                    adapter.itemCount < 1){   rvMovie.isVisible = false
+                    tvNotFound.isVisible = true
+                } else {
+                    tvNotFound.isVisible = false
+                }
+            }
         }
         viewModel.movies.observe(viewLifecycleOwner, {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
