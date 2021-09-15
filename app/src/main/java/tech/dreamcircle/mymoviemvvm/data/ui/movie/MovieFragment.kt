@@ -8,21 +8,23 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import tech.dreamcircle.mymoviemvvm.R
+import tech.dreamcircle.mymoviemvvm.data.remote.ResultsItem
 import tech.dreamcircle.mymoviemvvm.databinding.FragmentMovieBinding
 
 @AndroidEntryPoint
-class MovieFragment : Fragment(R.layout.fragment_movie) {
-    private val viewModel by viewModels<MovieViewModel>()
+class MovieFragment : Fragment(R.layout.fragment_movie), MovieAdapter.OnItemClickListener {
+    private val viewModel: MovieViewModel by viewModels()
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieBinding.bind(view)
-        val adapter = MovieAdapter()
+        val adapter = MovieAdapter(this)
         binding.apply {
             rvMovie.setHasFixedSize(true)
             rvMovie.adapter = adapter.withLoadStateHeaderAndFooter(
@@ -42,15 +44,17 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
 
                 if (loadState.source.refresh is LoadState.NotLoading &&
                     loadState.append.endOfPaginationReached &&
-                    adapter.itemCount < 1){   rvMovie.isVisible = false
+                    adapter.itemCount < 1
+                ) {
+                    rvMovie.isVisible = false
                     tvNotFound.isVisible = true
                 } else {
                     tvNotFound.isVisible = false
                 }
             }
         }
-        viewModel.movies.observe(viewLifecycleOwner, {
-            adapter.submitData(viewLifecycleOwner.lifecycle, it)
+        viewModel.movies.observe(this, {
+            adapter.submitData(lifecycle, it)
         })
 
         setHasOptionsMenu(true)
@@ -78,4 +82,10 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
 
         })
     }
+
+    override fun onItemClick(movie: ResultsItem) {
+        val action = MovieFragmentDirections.actionNavMovieToNavDetails(movie)
+        findNavController().navigate(action)
+    }
+
 }

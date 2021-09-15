@@ -11,9 +11,28 @@ import tech.dreamcircle.mymoviemvvm.R
 import tech.dreamcircle.mymoviemvvm.data.remote.ResultsItem
 import tech.dreamcircle.mymoviemvvm.databinding.ItemMovieBinding
 
-class MovieAdapter : PagingDataAdapter<ResultsItem, MovieAdapter.MovieViewBinding>(COMPARATOR) {
+class MovieAdapter(private val listener: OnItemClickListener) :
+    PagingDataAdapter<ResultsItem, MovieAdapter.MovieViewBinding>(COMPARATOR) {
+
+    interface OnItemClickListener {
+        fun onItemClick(movie: ResultsItem)
+    }
+
     inner class MovieViewBinding(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    if (item != null) {
+                        listener.onItemClick(item)
+                    }
+                }
+            }
+        }
+
         fun bind(resultsItem: ResultsItem) {
             with(binding) {
                 Glide.with(itemView)

@@ -37,5 +37,4 @@ class MoviePagingSource(
             LoadResult.Error(e)
         }
     }
-
 }
