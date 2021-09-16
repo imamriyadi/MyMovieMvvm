@@ -53,7 +53,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie), MovieAdapter.OnItemClic
                 }
             }
         }
-        viewModel.movies.observe(this, {
+        viewModel.movies.observe(viewLifecycleOwner, {
             adapter.submitData(lifecycle, it)
         })
 
