@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/MyMovieMvvm/app/src/main/res/drawable/favorite_toggle.xml" value="0.1125" />
         <entry key="..\:/Android/MyMovieMvvm/app/src/main/res/drawable/shade.xml" value="0.2203125" />
         <entry key="..\:/Android/MyMovieMvvm/app/src/main/res/layout/activity_main.xml" value="0.1852355072463768" />
         <entry key="..\:/Android/MyMovieMvvm/app/src/main/res/layout/fragment_details.xml" value="0.15" />

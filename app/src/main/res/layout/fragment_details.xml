@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -18,6 +19,20 @@
                 android:adjustViewBounds="true"
                 tools:layout_height="300dp"
                 tools:src="@color/cardview_dark_background" />
+
+            <ToggleButton
+                android:id="@+id/toggle_favorite"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="16dp"
+                android:background="@drawable/favorite_toggle"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:textOff=""
+                android:textOn="" />
+
             <TextView
                 android:id="@+id/tv_movie_title"
                 android:layout_width="wrap_content"
@@ -28,19 +43,18 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:visibility="gone"
-                tools:visibility="visible"
                 tools:text="Avengers"
-                />
-                <TextView
-                    android:id="@+id/tv_movie_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_below="@+id/tv_movie_title"
-                    tools:text="Sinopsis"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    />
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_movie_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_movie_title"
+                android:layout_marginHorizontal="8dp"
+                android:visibility="gone"
+                tools:text="Sinopsis"
+                tools:visibility="visible" />
         </RelativeLayout>
     </ScrollView>
 
@@ -50,6 +64,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"
-        tools:visibility="visible"
-        />
+        tools:visibility="visible" />
 </FrameLayout>
